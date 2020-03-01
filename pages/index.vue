@@ -20,6 +20,7 @@ export default {
       feed: []
     }
   },
+  middleware:['auth'],
   async asyncData({store}){
     const tasks = await store.dispatch('tasks/fetchTasks')
     const messages = await store.dispatch('feedMessages/fetchMessages')

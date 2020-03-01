@@ -18,6 +18,15 @@
         <el-option label="Тривиальная" value="trivial"></el-option>
       </el-select>
     </el-form-item>
+    <el-form-item label="Ответственный" prop="assigner">
+      <el-select v-model="ruleForm.assigner" placeholder="Ответственный">
+        <el-option label="Блокирующая" value="blocker"></el-option>
+        <el-option label="Критическая" value="critical"></el-option>
+        <el-option label="Значительная" value="major"></el-option>
+        <el-option label="Незначительная" value="minor"></el-option>
+        <el-option label="Тривиальная" value="trivial"></el-option>
+      </el-select>
+    </el-form-item>
     <el-form-item label="Крайний срок" required>
       <el-col :span="11">
         <el-form-item prop="date1">
@@ -39,23 +48,13 @@
         </el-form-item>
       </el-col>
     </el-form-item>
-    <el-form-item label="Instant delivery" prop="delivery">
-      <el-switch v-model="ruleForm.delivery"></el-switch>
-    </el-form-item>
-    <el-form-item label="Resources" prop="resource">
-      <el-radio-group v-model="ruleForm.resource">
-        <el-radio label="Sponsorship"></el-radio>
-        <el-radio label="Venue"></el-radio>
-      </el-radio-group>
-    </el-form-item>
     <el-form-item label="Описание" prop="desc">
       <el-input type="textarea" resize="none" v-model="ruleForm.desc"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')"
-        >Create</el-button
+        >Создать</el-button
       >
-      <el-button @click="resetForm('ruleForm')">Reset</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -85,6 +84,13 @@ export default {
             max: 5,
             message: "Length should be 3 to 5",
             trigger: "blur"
+          }
+        ],
+        assigner:[
+          {
+            required: true,
+            message: 'Пожалуйста укажите ответсвенного!',
+            trigger: 'change'
           }
         ],
         status: [
@@ -149,7 +155,8 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     }
-  }
+  },
+  middleware:['auth']
 };
 </script>
 
