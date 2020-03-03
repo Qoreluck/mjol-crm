@@ -5,6 +5,7 @@ const passport = require('passport')
 const passportStrat = require('./middleware/passport-strat')
 const bodyParser = require('body-parser')
 const authRoutes = require('./routes/auth.routes')
+const usersRoutes = require('./routes/users.routes')
 
 const app = express()
 
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 app.use('/api/auth', authRoutes)
+app.use('/api/data', usersRoutes)
 
 
 

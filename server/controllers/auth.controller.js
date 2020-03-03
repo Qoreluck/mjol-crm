@@ -24,7 +24,7 @@ module.exports.login = async (req, res) => {
       );
       res.json({ token });
     } else {
-      res.status(401).json({ message: "Пароль неверен!" });
+      res.status(401).json({ message: "Пользователь не найден" });
     }
   } else {
     res.status(404).json({ message: "Пользователь не найден" });
